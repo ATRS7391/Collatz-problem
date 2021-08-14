@@ -48,3 +48,5 @@ def take_proper_input():
 if __name__ == '__main__':
     data = main_problem(take_proper_input())
     print(f'Number: {data[0]}\nHighest: {data[1]}\nStopping Time: {data[2]}')
+    input('\n\nPress enter to exit. ')
+    quit()
