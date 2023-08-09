@@ -14,39 +14,20 @@ A simple Python program that takes a positive integer as input, then calculates 
 
 
 def main_problem(number: int):
-    number_copy = number
-    highest = 0
-    stopping_time = 0
-    while True:
+    highest = stopping_time = 0
+    while number != 1:
         stopping_time += 1
-        if number > highest:
-            highest = number
-        if number % 2 == 1:
-            number = (number * 3) + 1
-        else:
-            number = number // 2
-        if number == 1:
-            break
-    return number_copy, highest, stopping_time
-
-
-def take_proper_input():
-    try:
-        number = round(abs(float(input('Enter number (Positive integer value only): '))))
-        # If the number is float, it is rounded off to the nearest integer
-        # If the number is negative, it gets converted to positive
-        # 0 not accepted
-        if number == 0:
-            raise Exception
-        return number
-    except Exception:
-        print('Invalid data type')
-        input('Press enter to exit. ')
-        quit()
+        highest = max(highest, number)
+        number = (number * 3) + 1 if number % 2 else number // 2
+    return highest, stopping_time
 
 
 if __name__ == '__main__':
-    data = main_problem(take_proper_input())
-    print(f'Number: {data[0]}\nHighest: {data[1]}\nStopping Time: {data[2]}')
-    input('\n\nPress enter to exit. ')
-    quit()
+    try:
+        number = round(abs(float(input('Enter number (Positive integer value only): '))))
+        if not number:
+            raise Exception
+        highest, stopping_time = main_problem(number)
+        print(f'Number: {number}\nHighest: {highest}\nStopping Time: {stopping_time}')
+    except Exception:
+        print('Invalid data type')
